@@ -8,6 +8,7 @@
 ![Swing](https://img.shields.io/badge/GUI-Swing-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge)
 
 **A comprehensive tool for computer science students and professionals to explore binary, octal, decimal, and hexadecimal number systems with precision and ease.**
 
