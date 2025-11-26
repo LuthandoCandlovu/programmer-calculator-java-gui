@@ -179,8 +179,9 @@ The **Programmer Calculator** is a sophisticated Java application designed to de
 - **🔧 Developer Friendly** - Clean architecture for easy extension and modification
 - **📚 Well Documented** - Comprehensive guides for learning and implementation
 
-### At a Glance
+### 🎯 At a Glance
 
+```mermaid
 graph TD
     subgraph BASES["🔢 Number System Conversions"]
         B[Binary<br/>Base-2<br/>0,1]
@@ -221,6 +222,20 @@ graph TD
     style F4 fill:#667eea,stroke:#333,stroke-width:2px,color:#fff
     style BASES fill:#1e3c72,stroke:#fff,stroke-width:4px
     style FEATURES fill:#2a5298,stroke:#fff,stroke-width:4px
+```
+
+<div align="center">
+
+| 🎯 Feature | 📝 Description | ✅ Status |
+|:---:|:---|:---:|
+| **🔄 Universal Conversion** | Binary ↔ Octal ↔ Decimal ↔ Hex | ✅ 100% |
+| **➕ Arithmetic Operations** | Addition, Subtraction, Multiplication, Division | ✅ 100% |
+| **🔐 Signed Numbers** | 1's Complement, 2's Complement | ✅ 100% |
+| **📊 Fractional Support** | Up to 10 decimal places precision | ✅ 100% |
+| **⚡ Real-time Validation** | Instant error detection | ✅ 100% |
+| **🎨 Modern GUI** | Clean Swing interface | ✅ 100% |
+
+</div>
 
 ---
 
@@ -352,31 +367,7 @@ graph TB
     style UTIL fill:#16222a,stroke:#fff,stroke-width:3px
 ```
 
-### 📊 Feature Distribution & Statistics
-
-<div align="center">
-
-#### Supported Operations by Base
-
-```
-           Binary    Octal    Decimal    Hexadecimal
-           ┌────┐   ┌────┐    ┌────┐      ┌────┐
-Addition   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Subtract   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Multiply   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Division   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-           └────┘   └────┘    └────┘      └────┘
-```
-
-#### Code Composition
-
-```
-                    Total Lines: 2,500
-     ┌─────────────────────────────────────────────┐
-     │████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 45% Business Logic (1,125 lines)
-     │█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 35% GUI Components (875 lines)
-     │████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 15% Utilities (375 lines)
-     │█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│  5% Testing (125 lines)
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│  5% Testing (125 lines)
      └─────────────────────────────────────────────┘
 ```
 
