@@ -181,16 +181,46 @@ The **Programmer Calculator** is a sophisticated Java application designed to de
 
 ### At a Glance
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Binary (Base-2)  ←→  Octal (Base-8)  ←→  Decimal (Base-10) │
-│                    ↕                    ↕                     │
-│                  Hexadecimal (Base-16)                       │
-│                                                               │
-│  • Arithmetic Operations    • Signed Number Support          │
-│  • Fractional Conversion    • 1's & 2's Complement           │
-└─────────────────────────────────────────────────────────────┘
-```
+graph TD
+    subgraph BASES["🔢 Number System Conversions"]
+        B[Binary<br/>Base-2<br/>0,1]
+        O[Octal<br/>Base-8<br/>0-7]
+        D[Decimal<br/>Base-10<br/>0-9]
+        H[Hexadecimal<br/>Base-16<br/>0-9,A-F]
+    end
+    
+    subgraph FEATURES["✨ Core Features"]
+        F1[➕ Arithmetic Operations<br/>+ - × ÷]
+        F2[🔐 Signed Numbers<br/>1's & 2's Complement]
+        F3[📊 Fractional Conversion<br/>High Precision]
+        F4[✅ Real-time Validation<br/>Error Detection]
+    end
+    
+    B <-->|Convert| O
+    B <-->|Convert| D
+    B <-->|Convert| H
+    O <-->|Convert| D
+    O <-->|Convert| H
+    D <-->|Convert| H
+    
+    B -.->|Uses| F1
+    O -.->|Uses| F1
+    D -.->|Uses| F1
+    H -.->|Uses| F1
+    
+    B -.->|Supports| F2
+    B -.->|Supports| F3
+    
+    style B fill:#43e97b,stroke:#333,stroke-width:3px,color:#fff
+    style O fill:#f093fb,stroke:#333,stroke-width:3px,color:#fff
+    style D fill:#4facfe,stroke:#333,stroke-width:3px,color:#fff
+    style H fill:#fa709a,stroke:#333,stroke-width:3px,color:#fff
+    style F1 fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+    style F2 fill:#ffd700,stroke:#333,stroke-width:2px,color:#333
+    style F3 fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style F4 fill:#667eea,stroke:#333,stroke-width:2px,color:#fff
+    style BASES fill:#1e3c72,stroke:#fff,stroke-width:4px
+    style FEATURES fill:#2a5298,stroke:#fff,stroke-width:4px
 
 ---
 
