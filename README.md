@@ -22,8 +22,6 @@
 
 ---
 
-<img src="https://via.placeholder.com/800x400/1e1e2e/cdd6f4?text=Programmer+Calculator+Interface" alt="Calculator Interface" width="700"/>
-
 </div>
 
 ## 📖 Table of Contents
@@ -135,27 +133,262 @@ Example: 2's Complement Addition
 
 </details>
 
-<details>
-<summary><b>Input Validation & Error Handling</b></summary>
+---
 
-- Real-time syntax checking
-- Base-specific digit validation
-- Range overflow warnings
-- Clear error messages
-- Input sanitization
+## 🏗️ Architecture
 
-</details>
+<div align="center">
 
-<details>
-<summary><b>User Interface Enhancements</b></summary>
+### 🎯 System Architecture Visualization
 
-- Clean, modern Swing interface
-- Keyboard shortcuts support
-- Copy/paste functionality
-- Calculation history
-- Responsive layout design
+</div>
 
-</details>
+```mermaid
+graph TB
+    subgraph UI["🖥️ USER INTERFACE LAYER"]
+        GUI[Calculator GUI Application]
+        style GUI fill:#667eea,stroke:#333,stroke-width:3px,color:#fff
+    end
+    
+    subgraph EVENT["⚡ EVENT DISPATCHER LAYER"]
+        INPUT[Input Handler]
+        OUTPUT[Output Handler]
+        style INPUT fill:#f093fb,stroke:#333,stroke-width:2px,color:#fff
+        style OUTPUT fill:#f093fb,stroke:#333,stroke-width:2px,color:#fff
+    end
+    
+    subgraph CORE["🔧 CORE PROCESSING ENGINE"]
+        CONV[Conversion Engine<br/>Binary ⟷ Octal ⟷ Decimal ⟷ Hex]
+        ARITH[Arithmetic Engine<br/>+ - × ÷ in All Bases]
+        SIGNED[Signed Number Engine<br/>1's & 2's Complement]
+        style CONV fill:#4facfe,stroke:#333,stroke-width:2px,color:#fff
+        style ARITH fill:#43e97b,stroke:#333,stroke-width:2px,color:#fff
+        style SIGNED fill:#fa709a,stroke:#333,stroke-width:2px,color:#fff
+    end
+    
+    subgraph UTIL["🛠️ VALIDATION & UTILITY LAYER"]
+        VALID[Input Validator]
+        PARSER[Number Parser]
+        ERROR[Error Handler]
+        style VALID fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+        style PARSER fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+        style ERROR fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+    end
+    
+    GUI --> INPUT
+    GUI --> OUTPUT
+    INPUT --> CONV
+    INPUT --> ARITH
+    INPUT --> SIGNED
+    CONV --> VALID
+    ARITH --> PARSER
+    SIGNED --> ERROR
+    CONV --> OUTPUT
+    ARITH --> OUTPUT
+    SIGNED --> OUTPUT
+    
+    style UI fill:#1e3c72,stroke:#fff,stroke-width:4px
+    style EVENT fill:#2a5298,stroke:#fff,stroke-width:3px
+    style CORE fill:#0f2027,stroke:#fff,stroke-width:4px
+    style UTIL fill:#16222a,stroke:#fff,stroke-width:3px
+```
+
+### 📊 Feature Distribution & Statistics
+
+<div align="center">
+
+#### Supported Operations by Base
+
+```
+           Binary    Octal    Decimal    Hexadecimal
+           ┌────┐   ┌────┐    ┌────┐      ┌────┐
+Addition   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
+Subtract   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
+Multiply   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
+Division   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
+           └────┘   └────┘    └────┘      └────┘
+```
+
+#### Code Composition
+
+```
+                    Total Lines: 2,500
+     ┌─────────────────────────────────────────────┐
+     │████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 45% Business Logic (1,125 lines)
+     │█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 35% GUI Components (875 lines)
+     │████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 15% Utilities (375 lines)
+     │█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│  5% Testing (125 lines)
+     └─────────────────────────────────────────────┘
+```
+
+#### Test Coverage by Module
+
+```
+Conversion Engine    ████████████████████  95% ✓
+Arithmetic Engine    ███████████████████░  90% ✓
+Signed Number Engine ██████████████████░░  85% ✓
+GUI Components       ████████████░░░░░░░░  60% ⚠
+Utilities            ████████████████████  98% ✓
+                     └─────────────────┘
+                     0%              100%
+```
+
+</div>
+
+### 🎨 Colorful Component Architecture
+
+```mermaid
+graph LR
+    subgraph PACKAGES["📦 Package Structure"]
+        GUI["🎨 gui/<br/>UI Components"]
+        CONV["🔄 conversion/<br/>Base Converters"]
+        ARITH["🧮 arithmetic/<br/>Operations"]
+        SIGN["⚡ signed/<br/>Complement Logic"]
+        UTIL["🛠️ utils/<br/>Helpers"]
+    end
+    
+    GUI --> CONV
+    GUI --> ARITH
+    GUI --> SIGN
+    CONV --> UTIL
+    ARITH --> UTIL
+    SIGN --> UTIL
+    
+    style GUI fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
+    style CONV fill:#4ecdc4,stroke:#333,stroke-width:3px,color:#fff
+    style ARITH fill:#45b7d1,stroke:#333,stroke-width:3px,color:#fff
+    style SIGN fill:#f7b731,stroke:#333,stroke-width:3px,color:#fff
+    style UTIL fill:#5f27cd,stroke:#333,stroke-width:3px,color:#fff
+    style PACKAGES fill:#2d3436,stroke:#fff,stroke-width:4px
+```
+
+### 🔄 Animated Data Flow
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 User
+    participant G as 🖥️ GUI
+    participant V as ✅ Validator
+    participant C as 🔄 Converter
+    participant D as 📊 Display
+    
+    U->>G: Enter "1010" (Binary)
+    Note over G: Input captured
+    G->>V: Validate Input
+    Note over V: Check digits 0,1 only ✓
+    V->>C: Valid Binary String
+    Note over C: Binary → Decimal<br/>Algorithm
+    C->>C: Calculate: 1×8 + 0×4 + 1×2 + 0×1
+    C->>D: Result: "10"
+    D->>G: Format Display
+    G->>U: Show: "10₁₀"
+    Note over U,G: ✨ Conversion Complete! < 1ms
+    
+    rect rgb(102, 126, 234)
+    Note over U,D: Fast & Efficient Processing
+    end
+```
+
+### 🎯 Interactive Component Map
+
+```mermaid
+mindmap
+  root((🧮 Calculator))
+    🎨 UI Layer
+      Main Window
+      Tab Panels
+      Input Fields
+      Result Display
+    🔧 Business Logic
+      Conversion Engine
+        Binary Ops
+        Octal Ops
+        Decimal Ops
+        Hex Ops
+      Arithmetic Engine
+        Addition
+        Subtraction
+        Multiplication
+        Division
+      Signed Engine
+        1s Complement
+        2s Complement
+        Overflow Check
+    🛠️ Utilities
+      Validators
+      Parsers
+      Formatters
+      Error Handlers
+```
+
+### ⚡ Processing Pipeline
+
+```mermaid
+flowchart LR
+    A[📥 Input] --> B{✅ Valid?}
+    B -->|Yes| C[🔍 Parse]
+    B -->|No| Z[❌ Error Alert]
+    C --> D[🔄 Convert]
+    D --> E[🎨 Format]
+    E --> F[📤 Output]
+    F --> G[✨ Success!]
+    
+    style A fill:#667eea,stroke:#333,stroke-width:3px,color:#fff
+    style B fill:#f093fb,stroke:#333,stroke-width:3px,color:#fff
+    style C fill:#4facfe,stroke:#333,stroke-width:3px,color:#fff
+    style D fill:#43e97b,stroke:#333,stroke-width:3px,color:#fff
+    style E fill:#fa709a,stroke:#333,stroke-width:3px,color:#fff
+    style F fill:#ffecd2,stroke:#333,stroke-width:3px,color:#333
+    style G fill:#38f9d7,stroke:#333,stroke-width:4px,color:#333
+    style Z fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
+```
+
+### 🧩 Class Hierarchy
+
+```mermaid
+classDiagram
+    class BaseConverter {
+        +convert(String, int, int) String
+        +convertFractional() String
+        -validateInput() boolean
+    }
+    
+    class BinaryConverter {
+        +toDecimal() String
+        +toOctal() String
+        +toHex() String
+    }
+    
+    class ArithmeticEngine {
+        <<interface>>
+        +add(String, String) String
+        +subtract(String, String) String
+        +multiply(String, String) String
+        +divide(String, String) String
+    }
+    
+    class BinaryArithmetic {
+        +add() String
+        +subtract() String
+        -handleCarry() void
+    }
+    
+    class SignedNumberEngine {
+        +onesComplement() String
+        +twosComplement() String
+        +detectOverflow() boolean
+    }
+    
+    BaseConverter <|-- BinaryConverter
+    ArithmeticEngine <|.. BinaryArithmetic
+    BinaryArithmetic --> SignedNumberEngine
+    
+    style BaseConverter fill:#4facfe,stroke:#333,stroke-width:2px,color:#fff
+    style BinaryConverter fill:#43e97b,stroke:#333,stroke-width:2px,color:#fff
+    style ArithmeticEngine fill:#fa709a,stroke:#333,stroke-width:2px,color:#fff
+    style BinaryArithmetic fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+    style SignedNumberEngine fill:#667eea,stroke:#333,stroke-width:2px,color:#fff
+```
 
 ---
 
@@ -203,14 +436,6 @@ wget https://github.com/yourusername/programmer-calculator/releases/latest/calcu
 java -jar calculator.jar
 ```
 
-### First Run
-
-Upon launching, you'll see three main sections:
-
-1. **Conversion Tab** - Number system conversions
-2. **Arithmetic Tab** - Base arithmetic operations
-3. **Signed Numbers Tab** - Complement arithmetic
-
 ---
 
 ## 📘 User Guide
@@ -229,12 +454,6 @@ Task: Convert Decimal 42.5 to Binary
 5. Click "Convert"
 6. Result: 101010.1
 ```
-
-**Supported Formats:**
-
-- Integers: `42`, `FF`, `377`
-- Fractions: `42.5`, `1010.101`, `3.14`
-- Negative: `-42`, `-1010`, `-FF`
 
 ### Arithmetic Operations
 
@@ -258,485 +477,6 @@ Breakdown:
    10110
 ```
 
-**Supported Operations:**
-
-| Symbol | Operation | Example |
-|--------|-----------|---------|
-| + | Addition | `A + B` |
-| - | Subtraction | `A - B` |
-| × | Multiplication | `A × B` |
-| ÷ | Division | `A ÷ B` |
-
-### Signed Number Operations
-
-**2's Complement Example:**
-
-```
-Task: Subtract using 2's Complement
-
-1. Select "Signed Numbers" tab
-2. Method: 2's Complement
-3. First Number: 00010110 (22₁₀)
-4. Second Number: 00001011 (11₁₀)
-5. Operation: Subtraction
-6. Result: 00001011 (11₁₀)
-
-Process:
-1. Convert second number to 2's complement
-2. Add the numbers
-3. Detect overflow (if any)
-4. Display result
-```
-
----
-
-## 🏗️ Architecture
-
-<div align="center">
-
-### 🎯 System Architecture Visualization
-
-</div>
-
-```
-                    ╔══════════════════════════════════════════╗
-                    ║         USER INTERFACE LAYER            ║
-                    ║                                          ║
-                    ║    🖥️  Calculator GUI Application       ║
-                    ╚════════════════╤═════════════════════════╝
-                                     │
-                    ┌────────────────┴────────────────┐
-                    │    EVENT DISPATCHER LAYER       │
-                    │    (Handles User Interactions)  │
-                    └────────────┬───────────┬────────┘
-                                 │           │
-                    ┌────────────▼───┐   ┌───▼────────────┐
-                    │  Input Handler │   │ Output Handler │
-                    └────────────┬───┘   └───┬────────────┘
-                                 │           │
-        ╔════════════════════════╧═══════════╧════════════════════════╗
-        ║                    CORE PROCESSING ENGINE                   ║
-        ║                                                              ║
-        ║  ┏━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━┓  ║
-        ║  ┃  CONVERSION  ┃  ┃  ARITHMETIC  ┃  ┃  SIGNED NUMBER  ┃  ║
-        ║  ┃    ENGINE    ┃  ┃    ENGINE    ┃  ┃     ENGINE      ┃  ║
-        ║  ┃              ┃  ┃              ┃  ┃                 ┃  ║
-        ║  ┃  Binary ⟷    ┃  ┃  + - × ÷     ┃  ┃  1's & 2's      ┃  ║
-        ║  ┃  Octal ⟷     ┃  ┃  All Bases   ┃  ┃  Complement     ┃  ║
-        ║  ┃  Decimal ⟷   ┃  ┃  Integer &   ┃  ┃  Operations     ┃  ║
-        ║  ┃  Hex         ┃  ┃  Fractional  ┃  ┃  Overflow       ┃  ║
-        ║  ┗━━━━━━┯━━━━━━━┛  ┗━━━━━━┯━━━━━━┛  ┗━━━━━━┯━━━━━━━━━━┛  ║
-        ║         │                  │                 │             ║
-        ╚═════════╧══════════════════╧═════════════════╧═════════════╝
-                  │                  │                 │
-        ┌─────────▼──────────────────▼─────────────────▼─────────┐
-        │              VALIDATION & UTILITY LAYER                 │
-        │  • Input Validator  • Number Parser  • Error Handler   │
-        └─────────────────────────────────────────────────────────┘
-```
-
-### 📊 Feature Distribution & Statistics
-
-<div align="center">
-
-#### Supported Operations by Base
-
-```
-           Binary    Octal    Decimal    Hexadecimal
-           ┌────┐   ┌────┐    ┌────┐      ┌────┐
-Addition   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Subtract   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Multiply   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-Division   │ ██ │   │ ██ │    │ ██ │      │ ██ │  100%
-           └────┘   └────┘    └────┘      └────┘
-```
-
-#### Code Composition
-
-```
-                    Total Lines: 2,500
-     ┌─────────────────────────────────────────────┐
-     │████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 45% Business Logic (1,125 lines)
-     │█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 35% GUI Components (875 lines)
-     │████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ 15% Utilities (375 lines)
-     │█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│  5% Testing (125 lines)
-     └─────────────────────────────────────────────┘
-```
-
-#### Test Coverage by Module
-
-```
-Conversion Engine    ████████████████████  95% ✓
-Arithmetic Engine    ███████████████████░  90% ✓
-Signed Number Engine ██████████████████░░  85% ✓
-GUI Components       ████████████░░░░░░░░  60% ⚠
-Utilities            ████████████████████  98% ✓
-                     └─────────────────┘
-                     0%              100%
-```
-
-#### Performance Metrics
-
-```
-Operation Type         Average Time    Memory Usage
-─────────────────────────────────────────────────────
-Binary Conversion      ░░░ < 1ms       █░░ 2KB
-Octal Conversion       ░░░ < 1ms       █░░ 2KB
-Hex Conversion         ░░░ < 1ms       █░░ 2KB
-Fractional Convert     ░░░░ < 2ms      ██░ 4KB
-Binary Addition        ░░░ < 1ms       █░░ 2KB
-Binary Multiplication  ░░░░ < 2ms      ██░ 4KB
-2's Complement Add     ░░░ < 1ms       █░░ 2KB
-64-bit Operations      ░░░░░ < 3ms     ███ 8KB
-```
-
-</div>
-
-### 🎨 GUI Component Architecture
-
-<div align="center">
-
-```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                    CALCULATOR MAIN WINDOW                       ┃
-┃                     [800px × 600px]                             ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  Menu Bar: File | Edit | View | Tools | Help                   ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                  ┃
-┃  ┌─────────────────────────────────────────────────────────┐  ┃
-┃  │  [Conversion] [Arithmetic] [Signed Numbers]             │  ┃
-┃  │              ════════════                                │  ┃
-┃  └─────────────────────────────────────────────────────────┘  ┃
-┃                                                                  ┃
-┃  ╔════════════════════════════════════════════════════════╗   ┃
-┃  ║              CONVERSION PANEL (Active)                 ║   ┃
-┃  ║                                                         ║   ┃
-┃  ║  Source Base: [Binary ▼]     Target: [Decimal ▼]      ║   ┃
-┃  ║                                                         ║   ┃
-┃  ║  Input Number:                                          ║   ┃
-┃  ║  ┌─────────────────────────────────────────────────┐   ║   ┃
-┃  ║  │  1010.101                                       │   ║   ┃
-┃  ║  └─────────────────────────────────────────────────┘   ║   ┃
-┃  ║                                                         ║   ┃
-┃  ║  ┌─────────────┐  ┌──────────┐  ┌──────────────┐     ║   ┃
-┃  ║  │  Convert   │  │  Clear   │  │  History ▼   │     ║   ┃
-┃  ║  └─────────────┘  └──────────┘  └──────────────┘     ║   ┃
-┃  ║                                                         ║   ┃
-┃  ║  Result:                                                ║   ┃
-┃  ║  ╭─────────────────────────────────────────────────╮   ║   ┃
-┃  ║  │  Decimal: 10.625                                │   ║   ┃
-┃  ║  │                                                  │   ║   ┃
-┃  ║  │  Breakdown:                                      │   ║   ┃
-┃  ║  │  Integer: 1010₂ = 10₁₀                          │   ║   ┃
-┃  ║  │  Fraction: 0.101₂ = 0.625₁₀                     │   ║   ┃
-┃  ║  ╰─────────────────────────────────────────────────╯   ║   ┃
-┃  ╚════════════════════════════════════════════════════════╝   ┃
-┃                                                                  ┃
-┃  Status: Ready | Last operation: Binary → Decimal               ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-```
-
-</div>
-
-### 🧩 Panel Components Breakdown
-
-<table>
-<tr>
-<td width="33%" valign="top">
-
-**📝 Conversion Panel**
-
-```
-┌──────────────────┐
-│ Source Base      │
-│   [Dropdown ▼]   │
-├──────────────────┤
-│ Input Field      │
-│   [Text Input]   │
-├──────────────────┤
-│ Target Base      │
-│   [Dropdown ▼]   │
-├──────────────────┤
-│ Action Buttons   │
-│  [Convert] [Clear]│
-├──────────────────┤
-│ Result Display   │
-│   [Rich Text]    │
-└──────────────────┘
-```
-
-</td>
-<td width="33%" valign="top">
-
-**🧮 Arithmetic Panel**
-
-```
-┌──────────────────┐
-│ Operation Select │
-│   [+ - × ÷]      │
-├──────────────────┤
-│ Number Base      │
-│   [Dropdown ▼]   │
-├──────────────────┤
-│ First Operand    │
-│   [Text Input]   │
-├──────────────────┤
-│ Second Operand   │
-│   [Text Input]   │
-├──────────────────┤
-│ Calculate Button │
-│   [Calculate]    │
-├──────────────────┤
-│ Step-by-Step     │
-│   [Rich Display] │
-└──────────────────┘
-```
-
-</td>
-<td width="33%" valign="top">
-
-**⚡ Signed Panel**
-
-```
-┌──────────────────┐
-│ Method Select    │
-│ [1's/2's Comp ▼] │
-├──────────────────┤
-│ Bit Width        │
-│   [8/16/32 ▼]    │
-├──────────────────┤
-│ First Number     │
-│   [Binary Input] │
-├──────────────────┤
-│ Second Number    │
-│   [Binary Input] │
-├──────────────────┤
-│ Operation        │
-│   [Add/Sub ○]    │
-├──────────────────┤
-│ Result & Flags   │
-│ [Overflow Check] │
-└──────────────────┘
-```
-
-</td>
-</tr>
-</table>
-
-#### ⚙️ Business Logic Layer
-
-**Conversion Engine** (`conversion` package)
-
-```
-conversion/
-├── BaseConverter.java          # Main conversion orchestrator
-├── BinaryConverter.java        # Binary-specific conversions
-├── OctalConverter.java         # Octal-specific conversions
-├── DecimalConverter.java       # Decimal-specific conversions
-├── HexConverter.java           # Hexadecimal-specific conversions
-└── FractionalConverter.java    # Fractional number handling
-```
-
-**Arithmetic Engine** (`arithmetic` package)
-
-```
-arithmetic/
-├── ArithmeticEngine.java       # Base arithmetic interface
-├── BinaryArithmetic.java       # Binary operations
-├── OctalArithmetic.java        # Octal operations
-├── DecimalArithmetic.java      # Decimal operations
-└── HexArithmetic.java          # Hexadecimal operations
-```
-
-**Signed Number Engine** (`signed` package)
-
-```
-signed/
-├── SignedNumberEngine.java     # Signed arithmetic interface
-├── OnesComplement.java         # 1's complement operations
-├── TwosComplement.java         # 2's complement operations
-└── SignedNumberUtils.java      # Utility methods
-```
-
-#### 🔧 Utility Layer (`utils` package)
-
-```
-utils/
-├── NumberValidator.java        # Input validation
-├── ConversionUtils.java        # Common conversion methods
-├── MathUtils.java              # Mathematical utilities
-└── StringUtils.java            # String manipulation helpers
-```
-
-### 🔄 Data Flow Animation
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       USER INTERACTION                          │
-└────────────┬────────────────────────────────────────────────────┘
-             │
-             │  User enters: "1010" (Binary)
-             │  Wants: Decimal conversion
-             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 1: INPUT VALIDATION                                       │
-│  ┌─────────────────────────────────────────────────────┐       │
-│  │  ✓ Check valid binary digits (0,1 only)            │       │
-│  │  ✓ Validate format (integer or fractional)          │       │
-│  │  ✓ Check for edge cases                             │       │
-│  └─────────────────────────────────────────────────────┘       │
-└────────────┬────────────────────────────────────────────────────┘
-             │  Valid Input ✓
-             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 2: CONVERSION ENGINE                                      │
-│  ┌─────────────────────────────────────────────────────┐       │
-│  │  Binary → Decimal Algorithm:                        │       │
-│  │                                                       │       │
-│  │  1010₂                                               │       │
-│  │  = (1×2³) + (0×2²) + (1×2¹) + (0×2⁰)               │       │
-│  │  = 8 + 0 + 2 + 0                                    │       │
-│  │  = 10₁₀                                              │       │
-│  └─────────────────────────────────────────────────────┘       │
-└────────────┬────────────────────────────────────────────────────┘
-             │  Calculation Complete
-             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 3: RESULT FORMATTING                                      │
-│  ┌─────────────────────────────────────────────────────┐       │
-│  │  Format output for display                           │       │
-│  │  Add breakdown steps                                 │       │
-│  │  Prepare visual representation                       │       │
-│  └─────────────────────────────────────────────────────┘       │
-└────────────┬────────────────────────────────────────────────────┘
-             │  Formatted Result
-             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  STEP 4: DISPLAY TO USER                                        │
-│  ╔═══════════════════════════════════════════════════╗         │
-│  ║  Result: 10₁₀                                     ║         │
-│  ║                                                    ║         │
-│  ║  Breakdown:                                        ║         │
-│  ║  1010₂ = (1×8) + (0×4) + (1×2) + (0×1) = 10₁₀    ║         │
-│  ╚═══════════════════════════════════════════════════╝         │
-└─────────────────────────────────────────────────────────────────┘
-
-         🎉 Conversion Complete! Time: < 1ms
-```
-
-### ⚡ Processing Pipeline Visualization
-
-```
-Input → Validate → Parse → Convert → Format → Output
-  │        │         │        │         │        │
-  │        ├─ Type   ├─ Split ├─ Algo   ├─ Style ├─ Display
-  │        ├─ Range  ├─ Clean ├─ Math   ├─ Round └─ Success
-  │        └─ Syntax └─ Norm  └─ Check  └─ Label
-  │
-  └─ Error ──────────────────────────────────────→ Alert User
-```
-
-### 🎯 Interactive User Journey Map
-
-```
-                    START: User Opens Calculator
-                              │
-                              ▼
-                    ┌─────────────────────┐
-                    │  Choose Operation   │
-                    │                     │
-                    │  1️⃣ Conversion       │
-                    │  2️⃣ Arithmetic       │
-                    │  3️⃣ Signed Numbers   │
-                    └──────────┬──────────┘
-                              │
-              ┌───────────────┼───────────────┐
-              │               │               │
-              ▼               ▼               ▼
-    ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-    │ CONVERSION  │  │ ARITHMETIC  │  │   SIGNED    │
-    │   JOURNEY   │  │  JOURNEY    │  │  JOURNEY    │
-    └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-           │                │                │
-           ▼                ▼                ▼
-    
-    ═══════════════  ═══════════════  ═══════════════
-    CONVERSION PATH  ARITHMETIC PATH  SIGNED NUM PATH
-    ═══════════════  ═══════════════  ═══════════════
-    
-    1. Select Base   1. Choose Op     1. Select Method
-       Binary ▼         + - × ÷          1's/2's Comp
-       ↓                ↓                 ↓
-    2. Enter Number  2. Pick Base     2. Set Bit Width
-       1010.101         Binary ▼         8/16/32 bits
-       ↓                ↓                 ↓
-    3. Select Target 3. Enter Nums    3. Input Numbers
-       Decimal ▼        A: 1010          A: 00001111
-       ↓                B: 0110          B: 00000001
-    4. Convert          ↓                 ↓
-       [Button]      4. Calculate     4. Add/Subtract
-       ↓                [Button]         [Button]
-    5. View Result      ↓                 ↓
-       10.625        5. See Steps     5. Check Overflow
-       ↓                Result: 10000    No overflow ✓
-    6. Copy/Save        Breakdown        Result: 00010000
-       ✓                ✓                 ✓
-    
-    Success! ✨      Success! ✨      Success! ✨
-```
-
-### 🧠 Algorithm Complexity Analysis
-
-<div align="center">
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│              COMPUTATIONAL COMPLEXITY                       │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Binary → Decimal:     O(n)  ░░░░░ Fast                     │
-│  Decimal → Binary:     O(log n) ░░ Very Fast                │
-│  Binary Addition:      O(n)  ░░░░░ Fast                     │
-│  Binary Multiplication: O(n²) ░░░░░░░░ Moderate             │
-│  Fractional Convert:   O(n+m) ░░░░░░ Fast                   │
-│  2's Complement:       O(n)  ░░░░░ Fast                     │
-│                                                              │
-│  Where: n = number of digits, m = decimal places            │
-└─────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│                   SPACE COMPLEXITY                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  All Operations:       O(1) - Constant space               │
-│  String Storage:       O(n) - Linear with input size       │
-│  Result Buffer:        O(n) - Scales with precision        │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-```
-
-</div>
-
-### Design Patterns Used
-
-**1. Model-View-Controller (MVC)**
-- **Model:** Business logic engines
-- **View:** GUI components
-- **Controller:** Event handlers
-
-**2. Strategy Pattern**
-- Different arithmetic strategies per base
-- Pluggable conversion algorithms
-
-**3. Factory Pattern**
-- Dynamic engine instantiation
-- Base-specific operation creation
-
-**4. Singleton Pattern**
-- Utility classes
-- Validation services
-
 ---
 
 ## 🔌 API Reference
@@ -757,98 +497,7 @@ public class BaseConverter {
      */
     public static String convert(String number, int fromBase, int toBase)
         throws InvalidNumberException;
-    
-    /**
-     * Converts fractional numbers between bases
-     * @param integer Integer part
-     * @param fraction Fractional part
-     * @param fromBase Source base
-     * @param toBase Target base
-     * @return Converted number with decimal point
-     */
-    public static String convertFractional(String integer, String fraction,
-        int fromBase, int toBase);
 }
-```
-
-#### ArithmeticEngine
-
-```java
-public interface ArithmeticEngine {
-    String add(String a, String b);
-    String subtract(String a, String b);
-    String multiply(String a, String b);
-    String divide(String a, String b);
-}
-
-public class BinaryArithmetic implements ArithmeticEngine {
-    @Override
-    public String add(String a, String b) {
-        // Implementation
-    }
-    // ... other operations
-}
-```
-
-#### SignedNumberEngine
-
-```java
-public class TwosComplement {
-    /**
-     * Adds two numbers in 2's complement
-     * @param a First binary number
-     * @param b Second binary number
-     * @param bitWidth Number of bits to use
-     * @return Result with overflow flag
-     */
-    public static Result add(String a, String b, int bitWidth);
-    
-    /**
-     * Subtracts b from a using 2's complement
-     */
-    public static Result subtract(String a, String b, int bitWidth);
-}
-```
-
-### Usage Examples
-
-**Example 1: Simple Conversion**
-
-```java
-import conversion.BaseConverter;
-
-public class Example {
-    public static void main(String[] args) {
-        try {
-            String binary = BaseConverter.convert("42", 10, 2);
-            System.out.println(binary); // Output: 101010
-        } catch (InvalidNumberException e) {
-            System.err.println("Invalid input: " + e.getMessage());
-        }
-    }
-}
-```
-
-**Example 2: Arithmetic Operation**
-
-```java
-import arithmetic.BinaryArithmetic;
-
-BinaryArithmetic calc = new BinaryArithmetic();
-String result = calc.add("1010", "1100");
-System.out.println(result); // Output: 10110
-```
-
-**Example 3: Signed Addition**
-
-```java
-import signed.TwosComplement;
-
-TwosComplement.Result result = TwosComplement.add(
-    "00010110", "11110101", 8
-);
-System.out.println("Result: " + result.getValue());
-System.out.println("Overflow: " + result.hasOverflow());
 ```
 
 ---
@@ -869,168 +518,36 @@ programmer-calculator/
 │   │       ├── signed/
 │   │       └── utils/
 │   └── test/
-│       └── java/
-│           ├── conversion/
-│           ├── arithmetic/
-│           └── signed/
-├── resources/
-│   ├── images/
-│   └── config/
 ├── docs/
-│   ├── api/
-│   ├── user-guide/
-│   └── developer-guide/
-├── lib/
-├── build/
 ├── README.md
-├── LICENSE
-└── pom.xml / build.gradle
-```
-
-### Building from Source
-
-**Using Maven:**
-
-```bash
-# Clean and build
-mvn clean package
-
-# Run tests
-mvn test
-
-# Generate documentation
-mvn javadoc:javadoc
-
-# Run application
-mvn exec:java
-```
-
-**Using Gradle:**
-
-```bash
-# Build
-gradle build
-
-# Test
-gradle test
-
-# Run
-gradle run
-```
-
-### Testing
-
-```bash
-# Run all tests
-mvn test
-
-# Run specific test class
-mvn test -Dtest=BaseConverterTest
-
-# Run with coverage
-mvn test jacoco:report
-```
-
-**Test Coverage:**
-- Unit Tests: 85%
-- Integration Tests: 70%
-- GUI Tests: 60%
-
-### Code Style
-
-We follow **Google Java Style Guide**:
-
-```java
-// Good
-public class BaseConverter {
-    private static final int BINARY = 2;
-    
-    public String convert(String number) {
-        // Implementation
-    }
-}
+└── LICENSE
 ```
 
 ---
 
 ## 📚 Educational Resources
 
-### Fundamental Concepts
+### Number Systems Hierarchy
 
-#### Number Systems Hierarchy
-
+```mermaid
+graph TD
+    A[Number Systems] --> B[Positional Systems]
+    A --> C[Non-Positional]
+    B --> D[Binary Base-2<br/>Digits: 0,1]
+    B --> E[Octal Base-8<br/>Digits: 0-7]
+    B --> F[Decimal Base-10<br/>Digits: 0-9]
+    B --> G[Hexadecimal Base-16<br/>Digits: 0-9,A-F]
+    C --> H[Roman Numerals]
+    
+    style A fill:#667eea,stroke:#333,stroke-width:3px,color:#fff
+    style B fill:#4facfe,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#fa709a,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#43e97b,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#f093fb,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#ffecd2,stroke:#333,stroke-width:2px,color:#333
+    style G fill:#38f9d7,stroke:#333,stroke-width:2px,color:#333
+    style H fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
 ```
-Number Systems
-├── Positional Systems
-│   ├── Binary (Base-2)
-│   │   └── Digits: 0, 1
-│   ├── Octal (Base-8)
-│   │   └── Digits: 0-7
-│   ├── Decimal (Base-10)
-│   │   └── Digits: 0-9
-│   └── Hexadecimal (Base-16)
-│       └── Digits: 0-9, A-F
-└── Non-Positional Systems
-    └── Roman Numerals (Historical)
-```
-
-### Learning Path
-
-**Level 1: Foundations**
-1. Understanding positional notation
-2. Basic conversions (decimal ↔ binary)
-3. Simple arithmetic in binary
-
-**Level 2: Intermediate**
-1. Multi-base conversions
-2. Fractional numbers
-3. Signed number representation
-
-**Level 3: Advanced**
-1. Complement arithmetic
-2. Overflow detection
-3. Floating-point representation
-
-### Recommended Reading
-
-| Resource | Focus Area | Level |
-|----------|-----------|-------|
-| [Number System Basics](https://www.tpointtech.com/conversion-of-number-system-in-digital-electronics) | Conversions | Beginner |
-| [Signed Binary Numbers](https://www.electronics-tutorials.ws/binary/signed-binary-numbers.html) | Complements | Intermediate |
-| [IPS Gwalior Guide](https://www.ipsgwalior.org/download/number%20system.pdf) | Comprehensive | All Levels |
-| [MIT OCW](https://ocw.mit.edu/courses/16-01-unified-engineering-i-ii-iii-iv-fall-2005-spring-2006/84063b268408fcd4398c0ac44dfd6db5_number_systems.pdf) | Academic | Advanced |
-
-### Practice Problems
-
-<details>
-<summary><b>Beginner Exercises</b></summary>
-
-1. Convert 25₁₀ to binary
-2. Convert 1101₂ to decimal
-3. Add 1010₂ + 0110₂
-4. Convert A3₁₆ to decimal
-
-</details>
-
-<details>
-<summary><b>Intermediate Exercises</b></summary>
-
-1. Convert 13.5₁₀ to binary
-2. Multiply 101₂ × 11₂
-3. Convert 0.625₁₀ to octal
-4. Divide 1111₂ ÷ 11₂
-
-</details>
-
-<details>
-<summary><b>Advanced Exercises</b></summary>
-
-1. Add -5₁₀ + 3₁₀ using 2's complement (8-bit)
-2. Detect overflow in: 0111₂ + 0110₂ (4-bit signed)
-3. Convert -0.75₁₀ to 2's complement binary
-4. Implement division algorithm in binary
-
-</details>
 
 ---
 
@@ -1041,7 +558,7 @@ We welcome contributions! Here's how to get involved:
 ### Getting Started
 
 1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/your-username/programmer-calculator.git`
+2. **Clone** your fork
 3. **Create** a branch: `git checkout -b feature/amazing-feature`
 4. **Make** your changes
 5. **Test** thoroughly
@@ -1049,250 +566,25 @@ We welcome contributions! Here's how to get involved:
 7. **Push**: `git push origin feature/amazing-feature`
 8. **Open** a Pull Request
 
-### Contribution Guidelines
-
-**Code Standards:**
-- Follow Google Java Style Guide
-- Write comprehensive Javadoc comments
-- Include unit tests for new features
-- Maintain test coverage above 80%
-
-**Commit Messages:**
-```
-feat: add IEEE 754 floating point support
-fix: correct overflow detection in 8-bit operations
-docs: update API reference for BaseConverter
-test: add integration tests for signed arithmetic
-```
-
-### Areas for Contribution
-
-🎨 **UI/UX Improvements**
-- Dark mode theme
-- Keyboard shortcuts
-- Accessibility enhancements
-
-🐛 **Bug Fixes**
-- Check [Issues](https://github.com/yourusername/programmer-calculator/issues)
-- Reproduce and fix reported bugs
-
-✨ **New Features**
-- IEEE 754 support
-- BCD arithmetic
-- Bitwise operations
-- History functionality
-
-📝 **Documentation**
-- API examples
-- Tutorial videos
-- Translation (i18n)
-
-🧪 **Testing**
-- Unit tests
-- Integration tests
-- Performance tests
-
-### Development Workflow
-
-```
-main (protected)
-  │
-  ├─ develop (active development)
-  │    │
-  │    ├─ feature/new-feature
-  │    ├─ fix/bug-fix
-  │    └─ docs/documentation
-  │
-  └─ release/v2.0 (release candidates)
-```
-
----
-
-## 📊 Project Metrics
-
-### Statistics
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Lines of Code:        ~2,500
-Classes:              15+
-Methods:              120+
-Test Cases:           85+
-Test Coverage:        85%
-Supported Bases:      4
-Operations:           20+
-Contributors:         5
-Stars:                ⭐ (Give us one!)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
-### Performance Benchmarks
-
-| Operation | Input Size | Time (ms) |
-|-----------|-----------|-----------|
-| Binary → Decimal | 32-bit | < 1 |
-| Fractional Conversion | 10 decimals | < 2 |
-| Binary Addition | 64-bit | < 1 |
-| 2's Complement | 32-bit | < 1 |
-
----
-
-## 🐛 Known Issues & Limitations
-
-### Current Limitations
-
-- **Precision:** Fractional conversions limited to 10 decimal places
-- **Range:** Maximum 64-bit signed integer range
-- **Division:** Limited precision for repeating decimals
-- **GUI:** No dark mode (coming in v2.0)
-
-### Reporting Issues
-
-Found a bug? [Report it here](https://github.com/yourusername/programmer-calculator/issues/new)
-
-Include:
-- Operating System
-- Java Version
-- Steps to reproduce
-- Expected vs actual behavior
-- Screenshots (if applicable)
-
----
-
-## 🗺️ Roadmap
-
-### Version 2.0 (Q2 2025)
-
-- [ ] IEEE 754 floating-point support
-- [ ] Binary Coded Decimal (BCD)
-- [ ] Bitwise operations (AND, OR, XOR, NOT, shift)
-- [ ] Calculation history with export
-- [ ] Dark mode theme
-- [ ] Memory functions (M+, M-, MR, MC)
-- [ ] Scientific notation support
-
-### Version 3.0 (Q4 2025)
-
-- [ ] Web-based version (JavaScript/React)
-- [ ] Mobile apps (Android/iOS)
-- [ ] Plugin architecture
-- [ ] Advanced visualization (bit patterns, number line)
-- [ ] Interactive tutorials
-- [ ] Multi-language support (i18n)
-
-### Long-term Vision
-
-- [ ] Cloud synchronization
-- [ ] Collaborative calculations
-- [ ] AI-powered problem solving
-- [ ] Integration with IDEs
-- [ ] Custom number systems
-
 ---
 
 ## 📄 License
 
 This project is licensed under the **MIT License**.
 
-```
-MIT License
-
-Copyright (c) 2025 Luthando Candlovu
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
-
-[Full License Text](LICENSE)
-
 ---
 
 ## 👥 Authors & Acknowledgments
 
-<table>
-<tr>
-<td align="center">
-<img src="https://via.placeholder.com/100" width="100px;" alt=""/>
-<br />
-<b>Luthando Candlovu</b>
-<br />
-<sub>Lead Developer</sub>
-</td>
-<td align="center">
-<img src="https://via.placeholder.com/100" width="100px;" alt=""/>
-<br />
-<b>CSC212 Team</b>
-<br />
-<sub>Contributors</sub>
-</td>
-</tr>
-</table>
+### Lead Developer
+
+**Luthando Candlovu**
 
 ### Special Thanks
 
 - **CSC212 Course Staff** - Guidance and curriculum support
 - **Open Source Community** - Java libraries and tools
 - **Beta Testers** - Valuable feedback and bug reports
-- **You** - For using and contributing to this project!
-
----
-
-## 📞 Support & Community
-
-<div align="center">
-
-### Get Help & Stay Connected
-
-[![GitHub Issues](https://img.shields.io/badge/Issues-Report%20Bug-red?style=for-the-badge&logo=github)](https://github.com/yourusername/programmer-calculator/issues)
-[![Discussions](https://img.shields.io/badge/Discussions-Ask%20Questions-blue?style=for-the-badge&logo=github)](https://github.com/yourusername/programmer-calculator/discussions)
-[![Wiki](https://img.shields.io/badge/Wiki-Documentation-green?style=for-the-badge&logo=wikipedia)](https://github.com/yourusername/programmer-calculator/wiki)
-
-**📧 Email:** support@programmercalc.edu  
-**💬 Discord:** [Join our community](https://discord.gg/calculator)  
-**🐦 Twitter:** [@ProgCalc](https://twitter.com/progcalc)
-
-</div>
-
-### FAQ
-
-<details>
-<summary><b>How do I convert fractional numbers?</b></summary>
-
-Use the decimal point notation: `42.5`, `1010.101`, etc. The calculator automatically handles both integer and fractional parts.
-
-</details>
-
-<details>
-<summary><b>What's the maximum number I can calculate?</b></summary>
-
-The calculator supports 64-bit signed integers, ranging from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807.
-
-</details>
-
-<details>
-<summary><b>Can I use this in my project?</b></summary>
-
-Yes! It's MIT licensed. Use it freely in personal or commercial projects with attribution.
-
-</details>
-
-<details>
-<summary><b>How do I report a security vulnerability?</b></summary>
-
-Email security@programmercalc.edu with details. We'll respond within 48 hours.
-
-</details>
 
 ---
 
@@ -1300,23 +592,15 @@ Email security@programmercalc.edu with details. We'll respond within 48 hours.
 
 ## ⭐ Star This Project
 
-**If you find this calculator useful, give it a star!**  
-It helps others discover the project and motivates continued development.
+**If you find this calculator useful, give it a star!**
 
 [![GitHub stars](https://img.shields.io/github/stars/yourusername/programmer-calculator?style=social)](https://github.com/yourusername/programmer-calculator/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/programmer-calculator?style=social)](https://github.com/yourusername/programmer-calculator/network)
 
 ---
 
 ### Made with ❤️ by Luthando Candlovu
 
 *Empowering the next generation of computer scientists, one calculation at a time.*
-
----
-
-![Visitor Count](https://img.shields.io/badge/dynamic/json?color=blue&label=Visitors&query=value&url=https://api.countapi.xyz/hit/programmer-calculator/visits&style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/programmer-calculator?style=flat-square)
-![Code Size](https://img.shields.io/github/languages/code-size/yourusername/programmer-calculator?style=flat-square)
 
 **[⬆ Back to Top](#-programmer-calculator)**
 
